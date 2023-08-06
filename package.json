@@ -2,15 +2,19 @@
   "name": "lecture_track",
   "version": "1.0.0",
   "description": "",
-  "main": "src/bin.ts",
+  "main": "src/bin",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "upload": "scp -r src .env  pack*.json jinseok@${AWS_DEST}:tracking"
+    "clean": "rm -rf dist",
+    "upload": "scp -r dist/* .env  pack*.json jinseok@${AWS_DEST}:tracking",
+    "dist": "npm run clean && tsc && npm run upload"
   },
   "dependencies": {
+    "axios": "^1.4.0",
     "cheerio": "^1.0.0-rc.12",
     "dotenv": "^16.3.1",
-    "nodemailer": "^6.9.4"
+    "nodemailer": "^6.9.4",
+    "socks-proxy-agent": "^8.0.1"
   },
   "devDependencies": {
     "@types/nodemailer": "^6.4.9"

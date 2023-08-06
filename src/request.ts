@@ -1,4 +1,8 @@
 import * as cheerio from 'cheerio';
+import axios from 'axios';
+import { SocksProxyAgent } from 'socks-proxy-agent';
+
+const agent = new SocksProxyAgent('socks5://localhost:9050');
 
 export function getPayload(subject: string) {
   return `<?xml version="1.0" encoding="UTF-8"?>
@@ -39,18 +43,12 @@ const headers = getHeader();
 export async function request(payload: string): Promise<string> {
   if (!process.env.REQUEST_URL) throw new Error('REQUEST_URL undefined');
 
-  const response = await fetch(process.env.REQUEST_URL, {
-    method: 'post',
-    body: payload,
-    headers,
+  const response = await axios.post(process.env.REQUEST_URL, payload, {
+    headers: headers,
+    httpsAgent: agent,
   });
 
-  if (!response.ok) {
-    const err = await response.text();
-    throw err;
-  }
-
-  const data = await response.text();
+  const data = response.data;
   return data;
 }
 
