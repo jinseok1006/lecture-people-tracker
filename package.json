@@ -2,10 +2,11 @@
   "name": "lecture_track",
   "version": "1.0.0",
   "description": "",
-  "main": "src/bin.ts",
+  "main": "src/bin",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "upload": "scp -r src .env  pack*.json jinseok@${AWS_DEST}:tracking"
+    "clean": "rm -rf dist",
+    "upload": "scp -r dist/* .env  pack*.json jinseok@${AWS_DEST}:tracking",
+    "dist": "npm run clean && tsc && npm run upload"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.12",
