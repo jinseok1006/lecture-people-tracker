@@ -29,7 +29,7 @@ export async function run(subject: string, div: string): Promise<void> {
     const now = new Date();
     const gap = now.getTime() - latestMailingTime.getTime();
     const gapMinutes = (gap / 1000) * 60;
-    if (gapMinutes >= 5) {
+    if (gapMinutes <= 5) {
       return console.log(
         `마지막 메일 발송 시각: ${latestMailingTime.getHours()}:${latestMailingTime.getMinutes()}`
       );
