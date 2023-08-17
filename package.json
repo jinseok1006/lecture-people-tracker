@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rm -rf dist",
-    "upload": "scp -r dist/* .env  pack*.json jinseok@${AWS_DEST}:tracking",
-    "dist": "npm run clean && tsc && npm run upload"
+    "upload": "scp -r dist/* .env  pack*.json jinseok@${AWS_DEST}:tracker-build",
+    "build": "npm run clean && tsc"
   },
   "dependencies": {
     "axios": "^1.4.0",
